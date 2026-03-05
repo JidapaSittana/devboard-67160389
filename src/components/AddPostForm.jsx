@@ -36,6 +36,7 @@ function AddPostForm({ onAddPost }) {
           placeholder="หัวข้อโพสต์"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          maxLength={100} //ตั้งแม็กไว้ไม่ให้พิมพ์เกิน 100 ตัว
           style={{
             width: "100%",
             padding: "0.5rem",
