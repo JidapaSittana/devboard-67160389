@@ -6,12 +6,14 @@ function AddPostForm({ onAddPost }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!title.trim() || !body.trim()) return; // ป้องกันส่งว่าง
+    if (!title.trim() || !body.trim()) return; //ป้องกันส่งว่าง
 
     onAddPost({ title, body });
-    setTitle(""); // เคลียร์ form
+    setTitle(""); //เคลียร์ form
     setBody("");
   }
+  //เช็คว่าเหลือน้อยกว่า 10 ตัวหรือยังก็คือต้องพิมพ์เกิน 90 ตัว เอาไว้ไปใช้เปลี่ยนเป็นสีแดงตอนใกล้เกิน 100
+  const isNearLimit = title.length > 90;
 
   return (
     <form
@@ -28,21 +30,34 @@ function AddPostForm({ onAddPost }) {
         เพิ่มโพสต์ใหม่
       </h3>
 
-      <input
-        type="text"
-        placeholder="หัวข้อโพสต์"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "0.5rem",
-          marginBottom: "0.5rem",
-          border: "1px solid #cbd5e0",
-          borderRadius: "4px",
-          fontSize: "1rem",
-          boxSizing: "border-box",
-        }}
-      />
+      <div style={{ marginBottom: "0.5rem" }}>
+        <input
+          type="text"
+          placeholder="หัวข้อโพสต์"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "0.5rem",
+            marginBottom: "0.5rem",
+            border: "1px solid #cbd5e0",
+            borderRadius: "4px",
+            fontSize: "1rem",
+            boxSizing: "border-box",
+          }}
+        />
+        {/*โชว์เลขนับอักษรในเว็บ, เป็นสีเป็นแดงถ้าใกล้ถึงลิมิตก็คือฟังก์ชัน isNearLimit เป็นจริง*/}
+        <div
+          style={{
+            textAlign: "right",
+            fontSize: "0.8rem",
+            color: isNearLimit ? "red" : "gray",
+            marginTop: "4px",
+          }}
+        >
+          {title.length}/100
+        </div>
+      </div>
 
       <textarea
         placeholder="เนื้อหาโพสต์"
