@@ -75,7 +75,7 @@ function PostList({ favorites, onToggleFavorite }) {
             color: "#4a5568",
           }}
         >
-          โหลดใหม่
+          🔄 โหลดใหม่
         </button>
       </div>
 
