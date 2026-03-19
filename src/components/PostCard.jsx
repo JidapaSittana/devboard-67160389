@@ -36,7 +36,7 @@ function PostCard({ post, isFavorite, onToggleFavorite }) {
           {isFavorite ? "❤️ ถูกใจแล้ว" : "🤍 ถูกใจ"}
         </button>
 
-        {/* ปุ่มดูความคิดเห็น */}
+        {/*ปุ่มดูความคิดเห็น*/}
         <button
           onClick={() => setShowComments((prev) => !prev)}
           style={{
