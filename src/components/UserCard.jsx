@@ -1,9 +1,9 @@
 function UserCard({ name, email }) {
-  // ดึงตัวอักษรแรกมาทำ avatar
+  //ดึงตัวอักษรแรกชื่อนามสกุลมาทำโปรไฟล์ชื่อ
   const initials = name
-    .split(" ")
-    .map((n) => n[0])
-    .join("");
+    .split(" ") //แยกชื่อกับนามสกุลด้วยช่อง
+    .map((n) => n[0]) //ลูปเอาตัวแรกชื่อ นามสกุลออกมา
+    .join(""); //รวมตัวแรกเข้าด้วยกัน
 
   return (
     <div
@@ -35,6 +35,7 @@ function UserCard({ name, email }) {
         {initials}
       </div>
       <div>
+        {/*แยกสีชื่อกับเมล*/}
         <div style={{ fontWeight: "bold", color: "#2d3748" }}>{name}</div>
         <div style={{ fontSize: "0.85rem", color: "#718096" }}>{email}</div>
       </div>

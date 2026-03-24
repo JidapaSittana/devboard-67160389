@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext";
 import CommentList from "./CommentList";
 
+//ดึงฟังก์ชัน toggleFavorite เพิ่ม/ลดรายการโปรด
+//ดึงรายการ favorites มาจาก Context กลาง
 function PostCard({ post }) {
   const { favorites, toggleFavorite } = useFavorites();
+  //ตัวแปรเช็ค ID ของโพสต์เคยกดใจไว้ยัง, ไว้เลือกหัวใจแดง/ขาว
   const isFavorite = favorites.includes(post.id);
+  //สถานะตอนนี้กำลังเปิดหรือปิดดูคอมเมนต์ เริ่มต้นปิดไว้ก่อน
   const [showComments, setShowComments] = useState(false);
 
   return (
@@ -44,6 +48,7 @@ function PostCard({ post }) {
           {isFavorite ? "❤️" : "🤍"}
         </button>
 
+        {/*prev สั่งให้สลับค่าตรงข้าม เปิดอยู่ให้ปิด ปิดอยู่ให้เปิด*/}
         <button
           onClick={() => setShowComments((prev) => !prev)}
           style={{

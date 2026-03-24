@@ -1,23 +1,24 @@
 import { useState } from "react";
 
 function AddPostForm({ onAddPost }) {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(""); //สร้างที่เก็บข้อมูล 2ที่คือ titleและ bodyเอาไว้จำว่าผู้ใช้พิมพ์อะไรลงไปในฟอร์มบ้าง
   const [body, setBody] = useState("");
 
   function handleSubmit(e) {
-    e.preventDefault();
-    if (!title.trim() || !body.trim()) return; //ป้องกันส่งว่าง
+    e.preventDefault(); //สั่งไม่ให้หน้าเว็บ Refreshเองเวลากดส่งฟอร์ม
+    if (!title.trim() || !body.trim()) return; //ป้องกันการส่งช่องว่าง
 
-    onAddPost({ title, body });
-    setTitle(""); //เคลียร์ form
+    onAddPost({ title, body }); //ส่งข้อมูลที่พิมพ์เสร็จกลับไปให้คอมโพเนนต์หลักใช้งานต่อ
+    setTitle(""); //เคลียร์ formหลังส่ง
     setBody("");
   }
-  //เช็คว่าเหลือน้อยกว่า 10 ตัวหรือยังก็คือต้องพิมพ์เกิน 90 ตัว เอาไว้ไปใช้เปลี่ยนเป็นสีแดงตอนใกล้เกิน 100
+  //Challenge Task2
+  //เช็คว่าเหลือน้อยกว่า10ตัวหรือยังก็คือต้องพิมพ์เกิน 90ตัว เอาไว้ไปใช้เปลี่ยนเป็นสีแดงตอนใกล้เกิน 100
   const isNearLimit = title.length > 90;
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit} //ถ้ากดปุ่มโพสต์หรือ Enterในฟอร์ม ให้เรียกฟังก์ชัน handleSubmit ที่เตรียมไว้ข้างบน
       style={{
         border: "1px solid #e2e8f0",
         borderRadius: "8px",
@@ -34,8 +35,8 @@ function AddPostForm({ onAddPost }) {
         <input
           type="text"
           placeholder="หัวข้อโพสต์"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={title} //ให้หัวข้อในช่องพิมพ์ตรงกับ State ที่เก็บไว้
+          onChange={(e) => setTitle(e.target.value)} //ทุกครั้งพิมพ์ให้เอาตัวอักษรใหม่เก็บใน setTitle
           maxLength={100} //ตั้งแม็กไว้ไม่ให้พิมพ์เกิน 100 ตัว
           style={{
             width: "100%",
@@ -47,6 +48,7 @@ function AddPostForm({ onAddPost }) {
             boxSizing: "border-box",
           }}
         />
+        {/*Challenge Task2*/}
         {/*โชว์เลขนับอักษรในเว็บ, เป็นสีเป็นแดงถ้าใกล้ถึงลิมิตก็คือฟังก์ชัน isNearLimit เป็นจริง*/}
         <div
           style={{
@@ -56,10 +58,12 @@ function AddPostForm({ onAddPost }) {
             marginTop: "4px",
           }}
         >
+          {/*ตัวนับอักษร*/}
           {title.length}/100
         </div>
       </div>
 
+      {/*เหมือนช่องหัวข้อ แต่เก็บข้อมูลยาวกว่า*/}
       <textarea
         placeholder="เนื้อหาโพสต์"
         value={body}

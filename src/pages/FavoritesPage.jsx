@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext";
 
+//ดึงเอาไอดีที่เคยกดใจ กับฟังก์ชัน toggle..มาจาก contextกลาง
+//posts เก็บรายละเอียดโพสต์ที่ดึงมาจาก API ตามไอดีในรายการโปรด
 function FavoritesPage() {
   const { favorites, toggleFavorite } = useFavorites();
   const [posts, setPosts] = useState([]);
 
+  //จะทำงานทันทีทุกครั้งที่เลิกถูกใจ, มีการเปลี่ยน
   useEffect(() => {
     if (favorites.length === 0) return;
 
-    // ดึงเฉพาะโพสต์ที่ถูกใจ
+    //ดึงเฉพาะโพสต์ที่ถูกใจ
+    //ดึงทุกตัวพร้อมหมด มาเก็บใน setPosts
     async function fetchFavoritePosts() {
       const results = await Promise.all(
         favorites.map((id) =>
@@ -23,6 +27,7 @@ function FavoritesPage() {
     fetchFavoritePosts();
   }, [favorites]);
 
+  //เช็คว่ามี fav ไหม ถ้าไม่มีโชว์ข้อความกับปุ่มกลับหน้าหลัก
   if (favorites.length === 0) {
     return (
       <div

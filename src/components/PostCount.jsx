@@ -1,3 +1,4 @@
+//รับค่า count ตัวเลขจำนวนโพสต์มาจาก component หลักผ่าน Props
 function PostCount({ count }) {
   return (
     <p style={{ color: "#718096", fontSize: "0.9rem", marginBottom: "1rem" }}>

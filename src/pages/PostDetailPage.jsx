@@ -5,11 +5,12 @@ import CommentList from "../components/CommentList";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 function PostDetailPage() {
-  const { id } = useParams(); // ดึง id จาก URL เช่น /posts/3 → id = "3"
+  const { id } = useParams(); // ดึงไอดีจาก URL ระบบจะรู้ว่าต้องไปดึงตรงไหน
   const { favorites, toggleFavorite } = useFavorites();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //สั่งให้ดึงข้อมูลตามไอดีที่ได้จาก URL
   useEffect(() => {
     async function fetchPost() {
       const res = await fetch(
@@ -20,7 +21,7 @@ function PostDetailPage() {
       setLoading(false);
     }
     fetchPost();
-  }, [id]);
+  }, [id]); //ถ้าเปลี่ยนไปดูโพสต์อื่น ไอดีเปลี่ยน โค้ดก็จะทำงานใหม่
 
   if (loading) return <LoadingSpinner />;
 
@@ -58,6 +59,7 @@ function PostDetailPage() {
         </button>
       </div>
 
+      {/*ส่ง postId ไปให้CommentList ให้ไปดึงเฉพาะคอมเมนต์ที่เกี่ยวกับโพสต์นี้มาโชว์*/}
       <CommentList postId={post.id} />
     </div>
   );
